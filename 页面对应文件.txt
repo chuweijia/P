@@ -1,0 +1,118 @@
+ad-	//广告
+apprecom//
+area-    //地区
+ask-	//请求
+
+base	基础
+bbs-	论坛
+bdshare	//品牌分享
+brand	热门品牌 中国品牌
+bindtel //绑定电话
+businessall //商业？
+by-	    保养查询
+
+car-       品牌选车
+charge-    充电桩地图
+check      免检
+city-	   城市定位
+combo	   //组合
+common     //公共的
+comparetable //可比较的
+comparison   //比较
+config       //配置
+crumbly-     //面包屑
+
+data         //数据？？
+dealer-      经销
+detail       降价排行榜
+download-    //下载
+
+error-       //404
+
+factory      //工厂
+findpwd      //找回密码
+fasten       //
+float-       //浮动广告位
+favorite     //收藏？
+
+gotop        //返回顶部
+group	     车有惠、我参与的
+
+hot-	     热帖
+
+idea         意见
+index-       主页
+info         资讯
+imageview    //
+isay-        //爱？
+
+layout_      //样式
+log-reg      登陆注册
+lxsearch     //什么搜索
+login        登录
+location     //定位
+
+mall         //购车？
+m            //同上？
+my-          个人中心>口碑
+
+nav	     //导航
+new_         新能源
+n            //同上？
+normalize    //什么的标准
+
+password     //密码
+pagination   //翻页
+p	     配置
+personnal    论坛个人中心
+pic-         实拍
+price-       降价
+publish      //发布
+
+question-    //什么问答
+
+red-         //什么标识红色
+register     注册
+
+say-true     口碑
+screen-      //屏幕
+search-      //搜索部分
+select-      条件选车
+serious      热门车型
+sharepage    //分享页
+swiper       //击打？？
+signin       //签署
+
+tip          //什么捷径
+tool         工具
+top          //这都什么分类...
+topuser      //顶端用户？
+tshare       //？？
+
+used-        //已使用的？
+utils        //数据处理js文件
+
+vedio-       视频
+vue          //vue.js ..
+wd-          //??
+
+weizhang     违章
+wbshare      //微博分享
+
+xcarplayer   //爱卡的什么鬼
+yaohao	     摇号
+zepto        //那个框架   
+wx           //微信
+
+
+  
+
+
+ 
+
+
+  
+
+
+
+

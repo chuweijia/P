@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>xcar-页面关系</title>
+</head>
+<body>
+	<script type="text/javascript">
+
+
+	在对应找全页面所有css js以及相互关系（大概了解了网站组成和相关联的部分）
+	之后几天会今天找到文件顺序和重要程度 依次理清代码关系和学习seajs的使用
+
+
+
+
+	
+	//div.head-con
+	1.爱卡汽车
+		index.css lxsearch.css 
+		index.js
+
+	2.注册
+		base.css log-reg.css 
+		register.js 
+
+	3.登录
+	    base.css log-reg.css 
+		login.js 
+
+	//div.nav
+	base.css
+    sea.js
+
+    1.首页
+
+    	//#一级页面
+    	//div.car-tag 热门品牌 ||热门车型 || 中国品牌
+    	index.css lxsearch.css
+		index.js
+
+
+	    //##二级页面
+	    //div.car-tag 热门品牌 || 中国品牌
+	    brand.css
+	    brand.js
+
+	    //div.car-tag 热门车型
+	    seriseparent.css 
+	    seriseparent.js
+
+	    //div.tj-zx > 详情 || h3 选车 > 详情
+	    detail.css
+	    detail.js
+        
+	    //h3 关注排行榜 || h3 上市预告 ||h3 suv关注排行榜 > 车详情 || 促销价
+	    seriseparent.css 
+	    seriseparent.js
+
+	    ask-price.css
+	    ask-price.js
+	    //h3 上市预告 > 猜价 || h3 论坛精华 > 详情 || h3 人车生活 > 详情 || h3 人气收藏精华帖 > 详情
+	    bbs-all.css
+	    bbs-all.js
+	    
+ 		//span 热搜 
+	    search-result.css
+	    search-result.js
+
+
+	    //###三级页面
+	    //div.car-tag 热门品牌 > 问促销价
+	    ask-price.css
+	    ask-price.js
+	    //div.car-tag 热门品牌 || 热门车型 || 中国品牌 > 车详情  
+	    seriseparent.css
+	    seriseparent.js
+
+
+
+	2.找车
+
+		//#一级页面
+		//div.car-tag 品牌选车
+		car-style.css
+		car-style.js
+
+		//div.car-tag 条件选车
+		select-carCondition.css
+		select-carCondition.js
+
+		//div.car-tag 新能源选车
+		car-new-energy.css
+		car-new-energy.js
+
+		//##二级页面
+		//div.car-tag 品牌选车||条件选车||新能源选车> 车详情
+		seriseparent.css
+		seriseparent.js
+		//##三级页面
+		//div.car-tag 品牌选车||条件选车||新能源选车> 车详情 > 配置
+		pconfig.css
+		pconfig.js
+		//div.car-tag 品牌选车||条件选车||新能源选车> 车详情 > 经销商
+		car-parent-dealer.css
+		car-parent-dealer.js
+		//div.car-tag 品牌选车||条件选车||新能源选车> 车详情 > 实拍
+		pic-list.css
+		pic-list.js
+		//div.car-tag 品牌选车||条件选车||新能源选车> 车详情 > 文章
+		car-parent-article.css
+		car-parent-article.js
+		//div.car-tag 品牌选车||条件选车||新能源选车> 车详情 > 论坛
+		bbs-all.css
+		bbs-all.js
+		//div.car-tag 品牌选车||条件选车||新能源选车> 车详情 > 降价
+		car-parent-price.css
+		car-parent-price.js
+		//div.car-tag 品牌选车||条件选车||新能源选车> 车详情 > 口碑
+		say-true-wom.css
+		say-true-wom.js
+		//div.car-tag 品牌选车||条件选车||新能源选车> 车详情 > 视频
+		car-video.css
+		car-video.js
+
+	3.降价
+
+		//#一级页面
+		//div.car-tag 降价排行榜
+		select-car.css lxsearch.css price-rank.css
+		price-rank.js
+
+		//div.car-tag 车有惠、我参与的
+		group.css
+		group.js
+
+		//##二级页面 
+		//div.car-tag 降价排行榜 > 车详情
+		detail.css
+		detail.js 
+
+		//div.car-tag 车有惠 > 定位
+		city-entrance.css
+		city-entrance.js 
+
+
+
+
+	4.经销
+		//#一级页面 
+		//car-dealer-tag 4s、综合
+		select-car.css lxsearch.css dealer.css
+		dealer.js
+
+		//##二级页面
+		//car-dealer-tag 4s > 经销商详情 > 综述
+		dealer-roundup.css
+		dealer-roundup.js
+		//car-dealer-tag 4s > 经销商详情 > 网上展厅
+		dealer-exhibition.css
+		dealer-exhibition.js
+		//car-dealer-tag 4s > 经销商详情 > 促销行情 
+		dealer-hq.css
+		dealer-hq.js
+
+	5.资讯
+		//#一级页面
+		//div.car-tag 全部||新闻||评测||用车||导购
+		lxsearch.css info.css
+	    info.js
+
+	    //div.car-tag 行情
+	    area-market.css
+	    area-market.js
+
+	    //##二级页面
+	    //div.car-tag 全部||新闻||评测||用车||导购||行情 > 车详情
+	    detail.css
+	    detail.js
+
+	6.论坛
+
+		//#一级页面
+	    //div.car-dealer-tag 社区精选、查找论坛
+	    bbs-all.css
+	    bbs-all.js
+
+	    //div.car-dealer-tag 热帖
+	    hot-post.css
+	    hot-post.js
+
+	    //##二级页面
+	    //div.car-dealer-tag 热帖、社区精选、查找论坛 > 帖子详情
+	    bbs-all.css
+	    bbs-all.js
+
+	    //##三级页面
+	    //div.personal-wrap 个人中心 > 
+	    personal-index.css
+	    personal-index.js
+
+
+	7.视频
+
+		//#一级页面
+	    //ul.car-tag 最新、原创、新车、花边
+	    vedio-list.css
+	    vedio-list.js
+
+	    //##二级页面
+	    //ul.car-tag 最新、原创、新车、花边
+	    vedio-detail.css
+	    vedio-detail.js
+
+	8.工具
+
+		//#一级页面
+	    tool.css
+	    tool.js
+
+	    //##二级页面
+	    //div.app-item 摇号
+	    yaohao.css
+	    yaohao.js
+	    //div.app-item 违章
+	    weizhang.css
+	    weizhang.js
+	    //div.app-item 免检
+	    check.css
+	    check.js
+	    //div.app-item 购车计算、贷款计算、车险计算
+	    car-counter.css
+	    car-counter.js
+	    //div.app-item 保养查询
+	    by-query.css
+	    by-query.js
+	    //新能源
+	    new_energy.css
+	    new_energy.js
+	    //充电桩地图
+	    charge-poles.css
+	    charge-poles.js
+
+	 9.个人中心
+	   //基本页面 
+	   personal-index.js
+
+	   //详情 
+	   personal-data.js
+
+	   //个人中心>编辑 
+	   personal-edit.js
+
+	   //个人中心>兑换
+	   bbs-all.js
+
+	   //个人中心>收藏  
+	   personal-shoucang.js
+
+	   //个人中心>口碑 
+	   my-wom-list.js
+	   
+	10.提意见
+
+ 	   idea.js
+
+
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>

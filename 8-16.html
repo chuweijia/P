@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>xcar-个人中心</title>
+</head>
+<body>
+	<script type="text/javascript">
+	1.基本页面  personal-index.js  
+		  
+		   1.1 模板文件 
+		   $route['bbs/space'] = "bbs/personal/index/";
+		   $this->layout->view('bbs/personal_tpl', $data);
+		   //nxcar/application/controllers/bbs
+		   1.2 js文件
+		    require('lib/deferred');
+		    require('lib/lazyload');
+		    require("common").get("gotop");
+		    require("common").get("gopc");
+		    var report=require('utils').get('report');
+		    var store=require("lib/store").createStorage('localStorage');
+		    var signin=require('signin');//签到组件
+		    require("common").get("topuser");//??有必要
+		    懒加载//??
+		    
+		    $('.psn-sign-con .psn-sign-cmn #jump_url').on("click",function(){..//此为积分商城 除此之外a上都有href..})
+		    1.2.1 返回
+		          store.remove('_space_referer_');//???表达式
+       			  location.href=referer;
+		    1.2.2 退出
+		      	  //引用lib/cookie.js
+		    	  $.cookie('_discuz_uid',null,{domain:'.xcar.com.cn',path:'/'});//??表达式
+            	  $.cookie('_discuz_pw',null,{domain:'.xcar.com.cn',path:'/'});
+
+		   
+
+	2.详情页 
+	   2.1 详情 personal-data.js//只读
+
+	   	   2.1.1 模板文件
+		   	   	 $route['bbs/about.php'] = "bbs/personalinfo/index";
+		   	     $this->layout->view('bbs/personalinfo_tpl', $data) ;
+		   	     //点击后跳转到的路由地址 下一个页面  地址 nxcar/application/controllers/bbs
+
+	   	   2.1.2 js文件
+	   	   		 require('lib/lazyload');
+	   	    	 require("common").get("gotop");//?有吗
+    			 require("common").get("gopc");
+    			 require("common").get("topuser");
+   				 懒加载//未体现..?就一个图片还懒加载
+
+
+	   2.2 详情>编辑 personal-edit.js//只写
+	   	   2.2.1 模板文件
+	   	  		 $route['bbs/edit.php'] = "bbs/personalinfo/edit";
+	   	  		 $this->layout->view('bbs/personaledit_tpl', $data) ;
+	   	  		 //地址 nxcar/application/controllers/bbs
+	   	   2.2.2 js文件//确认下到底哪个用了
+	   	         require('lib/deferred');
+    		     require("common").get("gotop");
+   			     require("common").get("gopc");
+   			     require("common").get("topuser");
+   			     require('common').get('tip');
+   			     var cityselect=require("common").get("cityselect");//组件cityselect
+
+   			     unewname = trimStr(unewname);//..函数?
+   			     isexist = nameExist(times);
+   			     function nameExist(){.. 
+   			     	var api = baseurl+'nxcar/index.php/bbs/personalinfo/nameExist/';//ajax核验地址
+   			     }
+   			     sex//默认不是有一个自动选中么..？checkSex()
+   			     cityselect("#hqprov","#hqcity",function(provinceid,cityid) {
+					//??空
+    			 });
+
+
+
+	3.个人中心>积分商城
+ 		   	   //兑吧页面
+	4. 个人中心>兑换 bbs-all.js
+		   4.1 模板文件
+			   $route['bbstest/thread-(\d+)-(\d+).html'] = "bbs/viewthread_new/index/$1/$2/$3";//同上
+			   $this->layout->view('bbs/bbs-post-xq', $data);
+			   // $this->layout->view('bbs/error', $data);
+		   4.2 js文件
+		        require('lib/deferred');
+		        require('lib/lazyload');
+		        var utils = require('utils').get('str');
+		        var report = require('utils').get('report');
+		        var throttle = require('utils').get('throttle');
+		        var url = require("utils").get('url');
+		        require("common").get("gotop");
+		        require("common").get("gopc");
+		        var tip = require("common").get("tip");
+		        var tpl = require("lib/tpl");
+		   	    var swipe = require('lib/swipe');//轮播
+
+		   	    4.2.1 分享
+		   	     		var snsshare = require("common").get("snsshare");
+				   	    if ($('.tzshare > *')[0]) {
+		                    $('.tzshare').html("");//
+		                }
+
+		           	  收藏	
+		           	  	$('.shoucang')[0] && $(window).on('topuser',function(){
+		           	  		if (user.uid) {
+		           	  			$.post()..//此时后端判断是否已经收藏
+		           	  			$btn.on('click', function(){
+		           	  				已收藏//ajax
+		           	  				未收藏//ajax
+		           	  			})
+		           	  		}
+		           	  		
+		           	  	});
+
+		        4.2.2 帖子回复
+		        
+                4.2.3 只看楼主
+                	  <a href="http://a2.xcar.com.cn/bbs/thread-22634146-1.html">只看楼主</a>
+
+
+
+
+
+
+
+
+
+	5.个人中心>签到
+		   div.frame-wrap
+		   //同基本页面
+	6.个人中心>收藏 personal-shoucang.js
+		   5.1 模板文件
+		  	   $route['bbs/favorite.php'] = "bbs/collection/index";//同上
+		  	   $this->layout->view('bbs/personal-shoucang', $data) ;
+		   5.2 js文件 //确认哪些用了
+		   	   var utils=require('utils').get('str');
+		       var report=require('utils').get('report');
+		       var url=require("utils").get('url');
+		       require("common").get("gotop");
+		       require("common").get("gopc");
+		       var carselect=require('carselect4counter');//组件..没用啊
+
+		       5.2.1 普通模式
+		       		 $(".sc-hd-cmn").click(function(){..//可重写用})
+		       5.2.2 编辑模式
+		       	 	 $(".complete-btn1").click();
+		       	 	 $(".del-btn").live("click",function(){});
+		       	 	 //live()函数 所有的事件是委派而不是直接绑定在元素上的。一次只能绑定一个元素
+
+	7.个人中心>口碑 
+		   7.1 模板文件
+			   $route['bbs/space/koubei'] = "newcar/koubei/myWomList/";
+
+			   7.1.1   模板文件-口碑列表 my-wom-list.js
+						   $this->ci_smarty->display('wom/my-wom-list.tpl');
+						   //地址 控制器中 nxcar/application/controllers/newcar/koubei.php
+						   //地址 nxcar\application\views\templates\wom\my-wom-list.tpl 用到了smarty模板
+					   js文件
+		   	   		   		返回 history.go(-1);//这个函数在哪
+   							跳转 url 
+
+			   7.1.2   模板文件-发布口碑 publish-wom.js//VueJs
+			   	   	  	   $this->ci_smarty->display('wom/publish-wom.tpl');
+
+			   	   	   js文件(多个php模板 对应一个js)
+			   	   	   		7.1.2.1  Tip_1//Form1
+					   	   	   		'car-select'//选择车型 组件
+					   	   	   		 var selectcar = require('selectcar');//模板页用js写的
+
+					   	   	   		'date-select'//时间
+
+					   	   	   		//价格 油耗 里程存在于各个组件的模板里
+
+					   	   	   		'city-select'//城市
+					   	   	   		var selectcity = require('selectcity');//模板页用js写的
+
+					   	   	   		'dealer-select'//购车店
+
+					   	   	   		'check-tags'//多选标签
+
+					   	   	   		'input-tags'//添加标签
+
+					   	   	   		'next-step'//下一步
+
+					   	   	7.1.2.2  Tip_2//Form2
+					   	   	  		'star-list'//星星评分
+					   	   	  		'wom-appraise'//评价组件-文字
+					   	   	  		 rule:function(){alert(..)}//评价规则
+
+					   	   	7.1.2.3  Tip_3//Form3
+					   	   			 'web-uploader'//上传
+					   	   			 'select-other'//选择其他车
+					   	   			 var selectcar = require('selectcar')//模板页用js写的
+					   	   	7.1.2.4  Tip_4//发布成功
+					   	   			 var Plsuccess = ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		  
+
+	</script>
+</body>
+</html>

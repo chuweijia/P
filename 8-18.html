@@ -14,15 +14,53 @@
 	    	      $this->layout->view('bbs/bbs', $data) ;//社区精选..怎么和热帖同名
 
 	    	1.1.2 js文件
-	    		  bbs-all.js
+	    		  bbs-all.js//php渲染的界面 
+	    		  <?php foreach($retie as $item):?>//$retie[$item]
+	    		  $retie = $this->bbs_model->getretie();//地址 nxcar\application\models\bbs\bbs_model.php
+
+
+	    		  var swipe = require('lib/swipe');//大长腿轮播233 屏幕大小一定值时( <= ipad)
 
 	    1.2 查找论坛 
-	    	1.1.1 模板文件
+	    	1.2.1 模板文件
 	    		  $route['bbs/car.html'] = "bbs/bbs/club/";
 	    		  $this->layout->view('bbs/bbs-club', $data) ;
 
-	    	1.1.2 js文件
+	    		  1.2.1.1 爱车俱乐部(默认)
+	    		  		  $route['bbs/car.html'] = "bbs/bbs/club/";
+	    		  		  $this->layout->view('bbs/bbs-club', $data) ;
+	    		  1.2.1.2 地方分会
+	    		  		  $route['bbs/city.html'] = "bbs/bbs/area/";
+	    		  		  $this->layout->view('bbs/bbs-area', $data) ;
+	    		  1.2.1.3 人车生活
+	    		  		  $route['bbs/life.html'] = "bbs/bbs/life/";
+	    		  		  $this->layout->view('bbs/bbs-life', $data) ;
+
+
+	    	1.2.2 js文件
 	    		  bbs-all.js
+	    		  //大长腿轮播
+	    		  //发帖页-看车型 
+	    		  //发帖页-论坛搜索
+
+	    		  //帖子列表-帖子详情页
+	    		  //帖子列表-选择最佳答案
+	    		  //帖子列表-被引用格式过滤
+	    		  //页底回复
+	    		  //投票帖子
+	    		  //回复帖子
+	    		  //分享 收藏
+	    		  //帖子列表-帖子详情页-活动报名
+	    		  //展开全部子论坛
+	    		  //商务后台广告
+	    		  //引导下载APP
+
+	    		  //==============================本页实际用到的==================
+	    		  1.2.2.1 爱车俱乐部
+	    		  	      
+	    		  1.2.2.2 地方分会
+	    		  1.2.2.3 人车生活
+
 	    1.3 热帖 
 	    	1.1.1 模板文件
 	    		  $route['bbs/hot.html'] = "bbs/hotpost/index/1";
@@ -30,8 +68,20 @@
 	    		  //备注是热帖24小时..?
 	    		  $this->layout->view('bbs/hotpost_tpl', $data) ;
 
-	    	1.1.2 js文件
+	    	1.1.2 js文件//每个帖子都是带着url跳转的 php渲染的帖子
 	    		  hot-post.js
+	    		  require("lib/cookie");
+    		      require("common").get("gotop");
+    			  require("common").get("gopc");
+    			  require('lib/lazyload');
+    			  var swipe=require('lib/swipe');//很多函数在组件里被写了 非当前页面
+    			  src="<?=TOUCH_URL?>nxcar/index.php/patch/patch/slide_patchinfo"
+    			  //大长腿地址 nxcar\application\controllers\patch\patch.php php为了加seo而心机制作的地址
+
+    			  $(function(){..ios 7 safari  隐藏后台回来滚动失效bug增加touch事件解决 并没有$('.lazy')元素})
+
+    	    1.1.3 php渲染帖子
+
 
     2.论坛二级页面 ul.car-tag a
 

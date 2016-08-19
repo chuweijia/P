@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>xcar-注册界面</title>
+</head>
+<body>
+	<script type="text/javascript">
+	//====注册界面
+	//从网页模板入口 熟悉了注册相关按钮的使用 了解请求状态码 以及应用了那些组件 
+	//组件具体引用方法还没有找 今晚回去补充
+	
+
+    
+	//用户名 input name = reg_username
+	$('.reg-int .int[name=reg_username]').val();//取值
+	reg_username[1]//空 
+	reg_username[2]//正则 
+	$('.reg-int .int[name=reg_username]').on('blur',function(){
+        verifyname();
+    });//失焦时验证
+	'reg_username':$('.reg-int .int[name=reg_username]').val()//提交
+
+
+	//密码 input name = m_password
+	$('.reg-int .int[name=m_password]').val();//取值
+	m_password[1]//空
+	m_password[2]//长度
+	m_password[3]//强度
+	'm_password':md5($('.reg-int .int[name=m_password]').val())//提交时MD5信息加密算法 字符串转16进制
+	$('.reg-int .int[name=m_password]').on('blur',function(){
+        verifypw();
+    });//失焦时验证
+
+
+    //手机号码  name = mobile
+    $('.reg-int .int[name=mobile]').val()//取值
+    mobile[1]//空
+    mobile[2]//正则格式
+    mobile:$('.reg-int .int[name=mobile]').val()//提交
+    $('.reg-int .int[name=mobile]').on('blur',function(){
+        verifytel();
+    });//失焦时验证
+    rs.stat==6//错误状态码
+
+    //图片验证码 name = pincode id=hanzivcode
+    $('.reg-int .int[name=pincode]').val()//取值
+    'pincode':$('#hanzivcode').val()//在获取手机验证码过程中作为数据被提交
+     $('.reg-int .int[name=pincode]').on('blur',function(){
+        verifycode();
+    });//失焦时验证
+
+    //短信验证码 name = pincode
+    $('.reg-verify .reg-num[name=pincode]').val()//取值
+    pincode[0]//免费获取验证码
+    pincode[2]//#秒后重新获取 成功时倒计时会用到
+    if(rs&&rs.stat&&rs.stat==1){ //rs.stat==1 此时约定1为成功
+                    timer(60,function(vt){
+                        $('.reg-get').addClass('reg-late').html(verif.pincode[2].replace('#',vt));
+                    },function(){
+                        $('.reg-get').removeClass('reg-late').html(verif.pincode[0]);
+                    });
+    pincode[3]//空
+    pincode[4]//正则格式
+    rs.stat==3//状态码3 短信操作太频繁
+    rs.stat==4//状态码4 验证码发送失败
+    rs.stat==7//状态码7 ？？
+      $('.reg-verify .reg-num[name=pincode]').on('blur',function(){
+        verifpc();
+    });//失焦验证
+
+    $('.reg-get').on('click',function(e){
+        getphotocode();//免费获取验证码函数
+    });
+
+
+
+   //具体引用到组件
+    var utils=require('utils').get('str');//??
+    var report=require('utils').get('report');//?
+    var url=require('utils').get('url');//?  这些变量也没被引用啊..?? 
+
+
+    function timer(){} //倒计时函数
+    common.js组件 topuser()
+
+
+	</script>
+
+</body>
+</html>

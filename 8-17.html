@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>xcar-组件</title>
+</head>
+<body>
+	<script type="text/javascript">
+	1.topuser// 顶部登录 common.js下的组件  源文件assets/js/topuser.js
+	  
+	  1.1 组件模板
+	      define("topuser/tmpl",function(){
+	      	return 
+	      	      {{userurl}}
+	      	      {{face}}
+	      	      {{username}}// 组长自创式写法..
+	      });
+
+	  1.2 渲染模板
+
+	  	  $.cookie('_discuz_uid');// uid  {{userurl}} /bbs/usercenter.php?zoneclick=101232&uid='+uid
+    	  $.cookie('_discuz_pw');// upwd
+    	  $.cookie('_xcar_name')? $.str.UrlDecode(escape($.cookie('_xcar_name'))):$.str.UrlDecode(escape($.cookie('_xcar_name_utf8')));
+    	  // uname  {{username}}
+    	  get_avatar(uid)// {{face}} 根据uid拼接字串形成图片地址 $.extend()是什么??
+
+
+
+
+	2.cookie//lib/cookie.js
+          2.1 What
+          	  var cookie = function MOD(name, value, options){.. 封装好了2.2会直接传参用到.. }
+	          (function($) {
+	        		$.cookie=cookie;//cookie()  cookie.js
+	   		  })($);
+
+	   	  2.2 Do What//common.js
+	   	  	  $.cookie('_discuz_uid',data.uid,_cookieoption);//原生具体原理..
+     	      $.cookie('_xcar_name',data.uname,_cookieoption);
+
+
+	3.store//lib/store.js
+		  3.1 Where 
+			  var store=require("lib/store")//lib/store.js
+			  export.createStorage('localStorage');
+
+		  3.2 方法
+		      store.isSupport = _isSupport();//前提是客户端支持存储
+		      storeName == 'sessionStorage'||'localStorage'
+		      //localStorage 除非被清除，否则永久保存
+		      //sessionStorage 仅在当前会话下有效，关闭页面或浏览器后被清除
+		      //二者仅在客户端（即浏览器）中保存，不参与和服务器的通信
+
+		      store.get()// 获取key对应的val()
+		      store.set()//设置key value
+		      store.remove()//清掉key 和value
+		      store.clear()
+		      //在无prefix存在的情况下，调用clear将清除所有localStorage存储
+              //在存在prefix的情况下，调用clear将清除所有含有该前缀的存储信息
+		      store.getAll()
+		      //返回所有localStorage存储信息，或者含有prefix前缀的存储信息，如果没有任何存储信息，返回null
+		      //前缀..???
+	
+
+	4.url//util.js
+		  4.1 What 
+ 			  var url=require("utils").get("url");//返回值是一个方法 url()
+			  var _url=new url(location.href);//window.location.href = location.href
+			  var referer=_url.get('referer');
+
+		  4.2 方法
+		      this.params = (function(){..})(return len > 0 ? ret : {};);//返回值是数组 所以可取到[key]属性值
+		      url.prototype = {..应该是重新定义url 这个类了 _url是对象 可取属性}
+		      url.get(function(){
+		      	return this.params[key]; //取得referer属性对应的字串
+		      	//当浏览器向web服务器发送请求的时候，一般会带上Referer，告诉服务器我是从哪个页面链接过来的
+		      });
+
+
+
+	5.lazyload 
+		  $.fn.lazyload = function(options){..向外输出接口函数}
+		  
+	6.cityselect//common.js
+	7.swipe//大长腿轮播
+
+	</script>
+</body>
+</html>

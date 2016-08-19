@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Seajs文档</title>
+</head>
+<body>
+	<script type="text/javascript">
+	//SeaJs官方文档总结
+	//基础
+	1.模块系统
+			CommonJS -Modules 1.1.1 
+			NodeJS - Modules 
+			RequireJS - AMD 
+			SeaJs - CMD
+	2.CMD模块定义规范
+			define('id',[],function(require,export,module){});
+				2.1 define参数
+					函数 对象 字符串
+				2.2 require //是个函数 略 已写
+				2.3 export	//是个对象 用来向外提供模块接口
+					exports.foo = 'bar';
+				    exports.doSomething = function() {};//或module.exports
+				    return {//或
+					    foo: 'bar',
+					    doSomething: function() {}
+  					};
+
+				2.4 module //是个对象 获取一些本模块的属性
+
+					    module.id//String 模块的唯一标识
+					    module.uri//String 根据模块系统的路径解析规则得到的模块 绝对路径
+					    module.exports//Object 当前模块 对外提供的 接口
+					    module.dependencies//Array 表示当前模块的依赖。
+
+	3.模块标识
+
+		//后缀问题
+			后缀默认自动添加.js 加#号可禁止默认行为
+			?号后的部分默认不自动添加后缀
+			.css文件不可以省略后缀
+		//相对标识
+	   		(./   ../路径下的)
+
+
+		//顶级标识
+			根据基础路径解析 
+			即Sea.js 的 base 路径 (sea.js 的访问路径相关)
+			手工方式
+				seajs.config({
+	  				base: 'http://code.jquery.com/'
+				});
+	    //普通路径
+	    	绝对路径
+	    		"http://cdn.com/js/a"
+	    	根路径
+	    		"/js/b"
+	    	use中的相对路径
+	    		"./c"//会相对于当前页面(在base页中的路径)查找
+
+	4.require书写约定
+			4.1 定义
+  				require('./a') // 同步 接受模块标识作为唯一参数
+  				require.async(['./c', './d'], function(c, d) {
+				    c.doSomething();
+				    d.doSomething();
+				  });//异步 加载模块 且完成时执行回调(可选)  一般用来加载可延迟异步加载的模块..?
+  				require.resolve('./b')//返回值仅为解析后的绝对路径 用于需要拼接字串的情况
+  			4.2 书写约定
+  				4.2.1 require名字不可更改
+
+				4.2.2 不可更改性
+				var req = require, mod = req("./mod");// 错误 - 重命名 "require"！				
+				require = function() {};// 错误 - 重定义 "require"!			
+				function F(require) {}// 错误 - 重定义 "require" 为函数参数！	
+				function F() {
+				  var require = function() {};// 错误 - 在内嵌作用域内重定义了 "require"！
+				}
+				4.2.3 require参数为字符串直接量 //why 不都是可以转化的吗
+			4.3 一些优化习惯
+				if (todayIsWeekend)
+				  require("play");
+				else
+				  require("work"); //推荐使用异步加载 ..
+	5.模块的加载启动
+
+				seajs.use(['jquery', './main'], function($, main) {
+				  $(document).ready(function() {
+				    main.init();
+				  });
+				});
+
+			为了让 sea.js 内部能快速获取到自身路径，推荐手动加上 id 属性
+	6.seajs的配置
+			    seajs.config({
+
+				  // 别名配置 目录过长
+				  alias: {
+				    'es5-safe': 'gallery/es5-safe/0.9.3/es5-safe',
+				    'json': 'gallery/json/1.0.2/json',
+				    'jquery': 'jquery/jquery/1.10.1/jquery'
+				  },
+
+				  // 路径配置 目录过深
+				  paths: {
+				    'gallery': 'https://a.alipayobjects.com/gallery'
+				  },
+
+				  // 变量配置 
+				  vars: {
+				    'locale': 'zh-cn'
+				     //var lang = require('./i18n/{locale}.js');
+     				 //=> 加载的是 path/to/i18n/zh-cn.js
+
+				  },
+
+				  // 映射配置 用于路径转换、在线调试
+				  map: [
+				    //['http://example.com/js/app/', 'http://localhost/js/app/']
+				     [ '.js', '-debug.js' ]
+				     var a = require('./a');
+     				//=> 加载的是 path/to/a-debug.js 并不能懂..
+				  ],
+
+				  // 预加载项
+				  preload: [
+				    Function.prototype.bind ? '' : 'es5-safe',
+				    this.JSON ? '' : 'json'
+				    //preload 中的配置，需要等到 use 时才加载  并不能懂..
+				  ],
+
+				  // 调试模式
+				  debug: true,
+				  // 值为 true 时，加载器不会删除动态插入的 script 标签。插件也可以根据 debug 配置，来决策 log 等信息的输出。
+
+
+
+				  // Sea.js 的基础路径
+				  base: 'http://example.com/path/to/base/',
+
+				  // 文件编码
+				  charset: 'utf-8'
+				});		
+
+	7.构建工具
+				安装工具spm 工具（spm2）
+					$ npm install spm@2.x -g
+					$ npm install spm-build@0.x -g
+
+				运行构建命令
+					$ cd foo-module
+					$ spm build
+
+				自定义
+					grunt gulp
+
+
+
+
+
+
+	</script>
+</body>
+</html>

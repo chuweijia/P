@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>xcar-项目代码结构查找方式</title>
+</head>
+<body>
+	<script type="text/javascript">
+	// ======暂时没有读代码 先整理了下页面结构
+
+	// --div.nav 找车页面
+	查看页面源代码方式
+
+	1.右键查看网页源代码
+
+	2.找相应php文件查看
+	  2.1 路由重定向 $route['brand'] = "newcar/brandByBrand/index/"
+	  2.2 控制器中   $this->layout->view('newcar/brand_by_brand_tpl', $data)
+
+	js文件
+
+	1.如何引用进页面
+	  1.1 基础文件 sea.js 
+	  1.2 layout.php 定义变量 var model  = '<?=$css_name?>';//class与js就这样同名了..
+	  1.3 seajs.use() 对model变量的引用
+	  1.4 最终导入的js文件 car-style.js
+
+	2.关于seajs.use()//SeaJs学习中..先简单介绍
+	  2.1 参数是文件地址和回调函数(可以没有callback) 作用是加载模块
+		  seajs.use(['./a', './b'], function(a, b) {
+			  a.doSomething();
+			  b.doSomething();
+			});
+	  2.2 seajs.use(typeof model!='undefined'?model:'index'); //此时加载了car-style.js
+
+    3.关于car-style.js
+      3.1 define()+use()例子 
+           //Demo1.html
+		    seajs.use(['./c'],function(){
+		    console.log("callback");
+		})  
+		   //a.js
+		    define("id_a",function (require, exports, module){
+	 			exports.a = function(){//向外提供出口
+	 			console.log("a");
+			};
+		});
+		  //b.js
+		    var b = "b";
+		    console.log(b);
+
+		  //c.js
+		  	define("./c",['./a','./b'],function (require, exports, module){
+			var c1 = require("id_a");//require以模块标识作为唯一参数 向内提供接口
+			c1.a();
+			
+		});
+		  	//输出 b a callback 
+	  		3.1.2 测试总结(不完全)
+	   	   		   
+	   	   		  use()根据地址加载
+	   	   		  require以模块标识作为唯一参数 向内提供接口
+	   	   		  exports或者module.exports 是向外提供
+	   	   		  依赖模块顺序加载  根据内容决定是否立刻触发or不触发
+	   	   		  不立刻触发 则 可以通过require加以向内按需引用函数
+	   	   		  //其他的还没看到...还有同步异步等后续补充
+
+	   	   		  有个疑问 上述代码c.js我不能自定义模块标识id 难道是跟开头use()引用c.js有关？？
+	   	   		  		   require("./a").get("a"); get不识别 why??也可能是没看到..
+
+	   3.2 car-style.js初步认识 还没看代码..
+	     3.2.1 //car-style.js 
+	           define("car-style",["lib/zepto","lib/cookie","lib/lazyload","lib/store","utils","common"]
+	           	require('lib/lazyload');
+	           	var $=require('lib/zepto');
+	           	require("common").get("gotop")
+	           	require("common").get("gopc")
+	           	require("common").get("topuser")
+	           	require('utils').get('report')
+	           	require("lib/store").createStorage('localStorage');
+	           //zepto.js
+		           是个类似于jq的移动端响应较好的框架      
+	           //cookie.js
+		           有依赖于zepto
+		           cookie数据 加载即触发
+	           //lazyload.js
+		           有依赖于zepto
+		           图片懒加载
+		           $('.brand-img img').lazyload()
+	           //store.js
+	           	   有关于缓存的吧
+	           	   exports.createStorage = function(){}//向外输出接口
+	           //common.js
+	           	   公共组件 在上面被调用了三个方法
+	           	   define.pack("gopc"...)//去电脑版
+	           //util.js
+	               工具箱 目测关于数据的
+	           	   define.pack("report"...)//错误上报与统计上报
+
+
+
+
+    	  
+
+
+
+
+
+
+
+
+
+	  
+
+
+	</script>
+</body>
+</html>
